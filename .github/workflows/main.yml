@@ -15,9 +15,11 @@ jobs:
     - name: Create sample file with just timestamp
       run: date +%s >> report.txt
     - name: Commit file
+      env:
+          PAT_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
       run: |
           git config --global user.name 'Vincent Nguyen'
           git config --global user.email 'mr.vannguyen92@gmail.com'
           git add report.txt
           git commit -am "Automated report"
-          git push
+          git push https://$PAT_TOKEN@github.com/vincentnguyen92/j4f.git HEAD:main
